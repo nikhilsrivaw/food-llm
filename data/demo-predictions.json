@@ -1,0 +1,6 @@
+{
+  "schemaVersion": 1,
+  "mode": "simulator",
+  "predictions": {},
+  "note": "No food class is hardcoded into the interface. The simulator generates a clearly labeled illustrative top-3 response from data/class_names.json until the trained model is connected."
+}

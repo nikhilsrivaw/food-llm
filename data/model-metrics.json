@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "reference": {
+    "label": "Paper reference",
+    "model": "Inception V3 + transfer learning",
+    "classes": 20,
+    "epochs": 20,
+    "trainingAccuracy": 0.97,
+    "validationAccuracy": 0.9223,
+    "inferenceTimeSeconds": 1.6,
+    "source": "Chaitanya A., Shetty J., Chiplunkar P., Procedia Computer Science 218 (2023) 143–152"
+  },
+  "deployed": {
+    "label": "Team model",
+    "status": "pending_training",
+    "model": "Awaiting trained model handoff",
+    "classes": 20,
+    "epochs": null,
+    "trainingAccuracy": null,
+    "validationAccuracy": null,
+    "inferenceTimeSeconds": null,
+    "source": "Populate after the team model is evaluated"
+  }
+}

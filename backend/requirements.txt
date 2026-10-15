@@ -1,0 +1,6 @@
+# Optional live-model dependencies for CPython 3.10, 3.11, and 3.12.
+# The stdlib HTTP server and its unavailable-model state need no packages.
+# TensorFlow 2.16-2.19 has wheels for the supported Python versions here.
+numpy>=1.26,<2.0
+Pillow>=10.0
+tensorflow>=2.16,<2.20

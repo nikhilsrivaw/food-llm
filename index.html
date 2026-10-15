@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0b1220" />
+    <title>FoodVision AI | Food intelligence dashboard</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-mark">FV</div>
+          <div>
+            <div class="brand-name">FoodVision</div>
+            <div class="brand-subtitle">AI nutrition intelligence</div>
+          </div>
+        </div>
+
+        <nav class="side-nav" aria-label="Main navigation">
+          <button class="nav-item active" data-view="scanner">
+            <span class="nav-icon">⌁</span>
+            <span>Food scanner</span>
+            <span class="nav-dot"></span>
+          </button>
+          <button class="nav-item" data-view="workflow">
+            <span class="nav-icon">◈</span>
+            <span>How it works</span>
+          </button>
+        </nav>
+
+        <div class="sidebar-spacer"></div>
+
+        <div class="benchmark-card">
+          <div class="benchmark-topline">
+            <span class="mini-pulse"></span>
+            <span>Reference benchmark</span>
+          </div>
+          <div class="benchmark-value">97.00%</div>
+          <div class="benchmark-label">training accuracy · 20 classes</div>
+          <div class="benchmark-bar"><span></span></div>
+          <div class="benchmark-foot">Inception V3 + transfer learning</div>
+        </div>
+
+        <div class="sidebar-footer">
+          <span class="status-light"></span>
+          <span>Presentation build</span>
+          <span class="version">v0.1</span>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar">
+          <div>
+            <div class="breadcrumb"><span>PROJECT /</span> COMPUTER VISION</div>
+            <h1>Food image intelligence</h1>
+          </div>
+          <div class="topbar-actions">
+            <div class="system-status" id="system-status" aria-live="polite">
+              <span class="status-light"></span>
+              <span id="system-status-text">Demo engine ready</span>
+            </div>
+            <div class="mode-switch" role="group" aria-label="Prediction source">
+              <button class="mode-button" id="mode-demo" type="button" data-mode="demo" aria-pressed="false">Model simulator</button>
+              <button class="mode-button" id="mode-live" type="button" data-mode="live" aria-pressed="true">Live model</button>
+            </div>
+            <button class="avatar" title="Project owner">FY</button>
+          </div>
+        </header>
+
+        <section class="view active-view" id="scanner-view">
+          <div class="intro-row">
+            <div>
+              <p class="section-kicker">VISUAL NUTRITION ASSISTANT</p>
+              <h2>Turn a food photo into <em>useful insight.</em></h2>
+              <p class="intro-copy">Upload a dish and get a clear, presentation-ready view of its identity, nutrition profile, origin, and recipe context.</p>
+            </div>
+            <div class="intro-badge">
+              <span class="sparkle">✦</span>
+              <div><strong>Smart plate</strong><small>classification workspace</small></div>
+              <span class="intro-badge-live"><span class="status-light"></span>API ready</span>
+            </div>
+          </div>
+
+          <div class="scanner-grid">
+            <section class="panel upload-panel">
+              <div class="panel-heading">
+                <div>
+                  <p class="panel-eyebrow">STEP 01</p>
+                  <h3>Scan your plate</h3>
+                </div>
+                <span class="class-count">Model-driven input</span>
+              </div>
+
+              <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Upload a food image">
+                <input id="file-input" type="file" accept="image/*" capture="environment" />
+                <div class="dropzone-empty" id="dropzone-empty">
+                  <div class="upload-symbol"><span>↑</span></div>
+                  <strong>Drop a food image here</strong>
+                  <span>or <u>browse from your device</u></span>
+                  <small>JPG, PNG, WEBP · up to 10 MB</small>
+                </div>
+                <div class="preview-wrap hidden" id="preview-wrap">
+                  <img id="preview-image" alt="Selected food preview" />
+                  <div class="preview-overlay"><span id="preview-label">Image ready</span><small id="preview-hint">Click to replace</small></div>
+                </div>
+              </div>
+
+              <div class="scan-actions">
+                <button class="primary-button" id="analyze-button" disabled>
+                  <span class="button-spark">✦</span>
+                  <span>Analyze image</span>
+                  <span class="button-arrow">→</span>
+                </button>
+                <button class="text-button" id="clear-button" type="button">Clear</button>
+              </div>
+
+              <div class="or-divider"><span>MODEL HANDOFF SIMULATOR</span></div>
+              <div class="model-simulator">
+                <label for="class-picker">Select the class a trained model would return</label>
+                <select id="class-picker" aria-describedby="simulator-note"></select>
+                <button class="simulator-button" id="simulate-button" type="button">Run simulated model result <span>→</span></button>
+                <p class="demo-note" id="simulator-note"><span>ⓘ</span> This is not image recognition. It lets you demonstrate the post-training interface before your team's model file is connected.</p>
+              </div>
+              <div class="model-connection-note"><span class="status-light"></span><div><strong id="connection-title">Waiting for team model handoff</strong><small>Live mode will use the prediction API and the model's own class list.</small></div></div>
+              <div class="photo-deck">
+                <div class="photo-deck-heading"><div><p class="panel-eyebrow">UPLOADED DEMO PHOTOS</p><strong>Use a real dish photo</strong></div><span id="photo-count">0 photos</span></div>
+                <p class="photo-deck-note">These are your uploaded images. Selecting one previews the real photo and runs the labeled simulator—not image recognition.</p>
+                <div class="photo-gallery" id="photo-gallery"></div>
+              </div>
+            </section>
+
+            <section class="panel result-panel" id="result-panel">
+              <div class="panel-heading result-heading">
+                <div>
+                  <p class="panel-eyebrow">STEP 02</p>
+                  <h3>Food intelligence</h3>
+                </div>
+                <span class="result-state" id="result-state" aria-live="polite">READY</span>
+              </div>
+
+                <div class="result-empty" id="result-empty">
+                  <div class="empty-orbit"><span>✦</span></div>
+                  <h4 id="result-empty-title">Ready for a model prediction</h4>
+                  <p id="result-empty-detail">Upload an image. The trained model will produce the food label, then the information layer will enrich it.</p>
+                </div>
+
+              <div class="processing-state hidden" id="processing-state" aria-live="polite">
+                <div class="processing-spinner"></div>
+                <strong id="processing-title">Preparing analysis</strong>
+                <p id="processing-detail">Connecting the image classifier and food knowledge layer.</p>
+                <div class="processing-steps"><span class="processing-step active" id="process-image">Image received</span><span class="processing-step" id="process-model">CNN classification</span><span class="processing-step" id="process-data">Food information</span></div>
+              </div>
+
+                <div class="result-content hidden" id="result-content" aria-live="polite">
+                  <div class="food-identity">
+                    <div class="food-icon" id="food-icon">✦</div>
+                  <div class="food-copy">
+                    <span class="detected-label">DETECTED FOOD</span>
+                    <h4 id="food-name">Prediction result</h4>
+                    <p id="food-description">The trained model output will appear here.</p>
+                  </div>
+                  <div class="confidence">
+                    <div class="confidence-ring" id="confidence-ring" style="--confidence: 0deg"><span id="confidence-value">—</span><small>%</small></div>
+                    <span>confidence</span>
+                  </div>
+                </div>
+
+                <div class="prediction-meta">
+                  <div><span class="meta-label">MODEL</span><strong id="result-model">FoodVision demo fixture</strong></div>
+                  <div><span class="meta-label">INPUT</span><strong id="result-input">299 × 299 px</strong></div>
+                  <div><span class="meta-label">LATENCY</span><strong id="result-latency">1.6s target</strong></div>
+                </div>
+
+                <div class="top-predictions">
+                  <div class="detail-title"><span>≋</span> Ranked predictions</div>
+                  <div id="top-predictions-list"></div>
+                </div>
+
+                <div class="nutrition-heading"><div class="detail-title"><span>◒</span> Nutrition estimate</div><span id="nutrition-note">Waiting for knowledge-layer data</span></div>
+                <div class="metric-grid">
+                  <div class="metric-card calories"><span class="metric-icon">◒</span><span class="metric-label">Calories</span><strong id="metric-calories">—</strong><small>kcal / serving</small></div>
+                  <div class="metric-card protein"><span class="metric-icon">⌁</span><span class="metric-label">Protein</span><strong id="metric-protein">—</strong><small>per serving</small></div>
+                  <div class="metric-card carbs"><span class="metric-icon">◆</span><span class="metric-label">Carbs</span><strong id="metric-carbs">—</strong><small>per serving</small></div>
+                  <div class="metric-card fat"><span class="metric-icon">◌</span><span class="metric-label">Fat</span><strong id="metric-fat">—</strong><small>per serving</small></div>
+                </div>
+
+                <div class="insight-strip" id="health-insight"><span>✦</span><div><strong>Balanced choice</strong><p>Good protein contribution. Pair with vegetables for a more complete plate.</p></div></div>
+
+                <details class="info-accordion" open>
+                  <summary><span class="summary-icon">◎</span><span>Origin & ingredients</span><span class="summary-chevron">⌄</span></summary>
+                  <div class="detail-grid">
+                    <div class="detail-block"><div class="detail-title"><span>◎</span> Origin & context</div><p id="food-origin">Waiting for a model prediction.</p></div>
+                    <div class="detail-block"><div class="detail-title"><span>◇</span> Key ingredients</div><p id="food-ingredients">Waiting for food information retrieval.</p></div>
+                  </div>
+                </details>
+
+                <details class="info-accordion" open>
+                  <summary><span class="summary-icon">↗</span><span>Information retrieval evidence</span><span class="summary-chevron">⌄</span></summary>
+                <div class="retrieval-block">
+                  <div class="detail-title"><span>↗</span> Information retrieval evidence</div>
+                  <div class="retrieval-grid"><div><span>RETRIEVAL</span><strong id="retrieval-status">Not run</strong></div><div><span>OVERVIEW SOURCE</span><strong id="overview-source">Not run</strong></div><div><span>RECIPE SOURCE</span><strong id="recipe-source">Not run</strong></div></div>
+                  <p class="retrieval-note" id="retrieval-note">The predicted class will be sent to the knowledge layer. Nutrition is shown only when a labeled record is available.</p>
+                  <div class="source-list" id="source-list"></div>
+                </div>
+                </details>
+
+                <details class="info-accordion">
+                  <summary><span class="summary-icon">▹</span><span>Quick preparation suggestion</span><span class="summary-chevron">⌄</span></summary>
+                <div class="recipe-block">
+                  <div class="detail-title"><span>▹</span> Quick preparation</div>
+                  <div class="recipe-steps" id="recipe-steps"></div>
+                </div>
+                </details>
+
+                <div class="result-footer"><span id="analysis-source">No prediction yet</span><div class="result-footer-actions"><button class="outline-button" id="download-report-button">Download JSON report <span>↓</span></button><button class="outline-button" id="new-scan-button">New scan <span>→</span></button></div></div>
+              </div>
+            </section>
+          </div>
+
+          <div class="stats-row">
+            <div class="stat-item"><span class="stat-number" id="stat-classes">20</span><span class="stat-text">Food classes<br /><small id="stat-classes-note">Food-101 subset</small></span></div>
+            <div class="stat-item"><span class="stat-number" id="stat-latency">1.6s</span><span class="stat-text">Inference time<br /><small>reference target</small></span></div>
+            <div class="stat-item"><span class="stat-number" id="stat-validation">92.23%</span><span class="stat-text">Validation accuracy<br /><small>paper reference</small></span></div>
+            <div class="stat-item stat-note"><span class="stat-icon">✦</span><span class="stat-text"><strong>Built for clarity</strong><small>Recognition → insight → action</small></span></div>
+          </div>
+        </section>
+
+        <section class="view secondary-view" id="workflow-view">
+          <div class="intro-row compact"><div><p class="section-kicker">SYSTEM WORKFLOW</p><h2>From pixels to <em>plate intelligence.</em></h2><p class="intro-copy">The proposed architecture follows the reference paper while keeping this presentation build lightweight and dependable.</p></div></div>
+          <div class="workflow-card panel">
+            <div class="workflow-line"></div>
+            <div class="workflow-step"><div class="workflow-number">01</div><div class="workflow-icon">↑</div><h3>Image input</h3><p>User uploads a food image from a phone or computer.</p></div>
+            <div class="workflow-step"><div class="workflow-number">02</div><div class="workflow-icon">⌁</div><h3>Visual model</h3><p>Inception V3 transfer learning predicts the food class.</p></div>
+            <div class="workflow-step"><div class="workflow-number">03</div><div class="workflow-icon">◎</div><h3>Knowledge layer</h3><p>The food label retrieves nutrition, origin, and recipe context.</p></div>
+            <div class="workflow-step"><div class="workflow-number">04</div><div class="workflow-icon">✦</div><h3>User insight</h3><p>A simple dashboard turns the result into a useful decision.</p></div>
+          </div>
+          <div class="model-card panel">
+            <div class="model-card-head"><div><p class="panel-eyebrow">MODEL CARD</p><h3 id="model-card-name">Inception V3 + transfer learning</h3></div><span class="model-badge" id="model-card-status">REFERENCE</span></div>
+            <div class="model-card-grid"><div><span>Training accuracy</span><strong id="model-training-accuracy">97.00%</strong></div><div><span>Validation accuracy</span><strong id="model-validation-accuracy">92.23%</strong></div><div><span>Classes</span><strong id="model-card-classes">20</strong></div><div><span>Input size</span><strong id="model-input-size">299 × 299</strong></div></div>
+            <p class="model-card-note" id="model-card-note">Reference metrics from the supplied paper. Replace with your team's measured model metrics after training.</p>
+          </div>
+          <div class="workflow-notes"><div class="panel note-card"><span class="note-accent green"></span><p class="panel-eyebrow">MODEL</p><h3>Transfer learning</h3><p>Pre-trained visual features reduce training time and help the classifier generalize across food images.</p></div><div class="panel note-card"><span class="note-accent orange"></span><p class="panel-eyebrow">DATA</p><h3>Structured results</h3><p>A curated local knowledge base keeps the demo reliable even when live web services are unavailable.</p></div><div class="panel note-card"><span class="note-accent purple"></span><p class="panel-eyebrow">NEXT STEP</p><h3>Live crawlers</h3><p>Scrapy and Selenium can be connected later for live restaurant and recipe retrieval.</p></div></div>
+        </section>
+
+        <section class="view secondary-view" id="about-view">
+          <div class="intro-row compact"><div><p class="section-kicker">PROJECT NOTES</p><h2>A practical prototype for <em>tomorrow's demo.</em></h2><p class="intro-copy">This build turns the paper's concept into a tangible end-to-end user experience.</p></div></div>
+          <div class="about-grid"><div class="panel about-card"><div class="about-icon">◈</div><p class="panel-eyebrow">WHAT IS LIVE</p><h3>Presentation flow</h3><ul><li>Image upload and preview</li><li>Explicit simulator / Live model modes</li><li>Dynamic class list from project labels</li><li>Ranked predictions and evidence trail</li><li>Downloadable analysis report</li></ul></div><div class="panel about-card"><div class="about-icon">◇</div><p class="panel-eyebrow">REFERENCE PAPER</p><h3>Food-101 + Inception V3</h3><p>Reported results from the supplied paper are shown as reference benchmarks, not as a locally retrained model in this build.</p><div class="citation">Chaitanya A., Shetty J., Chiplunkar P. · Procedia Computer Science 218 (2023) 143–152</div></div><div class="panel about-card"><div class="about-icon">→</div><p class="panel-eyebrow">NEXT ITERATION</p><h3>Production path</h3><p>Connect the team's trained TensorFlow model through the prediction API, then replace illustrative local records with verified nutrition providers and approved recipe/origin APIs.</p></div></div>
+        </section>
+
+        <footer class="page-footer"><span>FoodVision AI · Final-year project presentation build</span><span>Computer vision <i>×</i> nutrition intelligence</span></footer>
+      </main>
+    </div>
+  </body>
+</html>

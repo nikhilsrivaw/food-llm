@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+env/
+.env
+.env.*
+model/*.keras
+model/*.h5
+model/*.hdf5
+model/*.onnx
+model/*.pt
+model/*.pth
+*.log

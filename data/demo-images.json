@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "sourceDirectory": "foods-example",
+  "images": [
+    {"classId": "biryani", "label": "Biryani", "path": "foods-example/biryani.jpg", "alt": "A plate of biryani rice", "source": "Uploaded project demo photo"},
+    {"classId": "caesar_salad", "label": "Caesar salad", "path": "foods-example/caeser salad.jpg", "alt": "A Caesar salad", "source": "Uploaded project demo photo"},
+    {"classId": "chicken_wings", "label": "Chicken wings", "path": "foods-example/chickenwing.jpg", "alt": "Glazed chicken wings on a plate", "source": "Uploaded project demo photo"},
+    {"classId": "chole_bhature", "label": "Chole bhature", "path": "foods-example/cholabhatura.jpg", "alt": "Chole bhature with chickpea curry and fried bread", "source": "Uploaded project demo photo"},
+    {"classId": "french_fries", "label": "French fries", "path": "foods-example/frebnch_fries.jpg", "alt": "French fries", "source": "Uploaded project demo photo"},
+    {"classId": "hamburger", "label": "Hamburger", "path": "foods-example/hamburger.jpg", "alt": "A hamburger", "source": "Uploaded project demo photo"},
+    {"classId": "ice_cream", "label": "Ice cream", "path": "foods-example/icecreams.jpg", "alt": "Ice cream", "source": "Uploaded project demo photo"},
+    {"classId": "pizza", "label": "Pizza", "path": "foods-example/pizza.jpg", "alt": "A slice of pizza", "source": "Uploaded project demo photo"},
+    {"classId": "grilled_salmon", "label": "Grilled salmon", "path": "foods-example/salmon.jpg", "alt": "Grilled salmon with vegetables", "source": "Uploaded project demo photo"},
+    {"classId": "spaghetti_bolognese", "label": "Spaghetti bolognese", "path": "foods-example/spaghetti.jpg", "alt": "Spaghetti pasta", "source": "Uploaded project demo photo"}
+  ]
+}

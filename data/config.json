@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "apiBase": "/api/v1",
+  "defaultMode": "live",
+  "topK": 3,
+  "confidenceThreshold": 0.5,
+  "lowConfidenceThreshold": 0.75,
+  "inputSize": 299,
+  "preprocessing": "inception_v3_preprocess_input",
+  "maxUploadBytes": 10485760
+}
